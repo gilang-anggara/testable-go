@@ -1,9 +1,9 @@
-package routine_test
+package managed_test
 
 import (
 	"testing"
 
-	"github.com/gilang-anggara/testable-go/routine"
+	"github.com/gilang-anggara/testable-go/routine/managed"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -21,12 +21,12 @@ func (r *routineManager) Run(f func()) {
 	f()
 }
 
-func Test_ExampleFunction(t *testing.T) {
+func Test_ExampleFunction_WithMockRoutine(t *testing.T) {
 	e := &expectedToBeCalled{}
 
-	e.On("Run").Twice()
+	e.On("Run")
 
-	s := routine.Target{&routineManager{}, e}
+	s := managed.Target{&routineManager{}, e}
 
 	s.ExampleFunction()
 
